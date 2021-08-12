@@ -1,0 +1,22 @@
+PS D:\frameworks\django_projects\blog\django_project> python manage.py shell
+Python 3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.contrib.auth.models import User
+>>> user = User.objects.filter(username='vikas859').first()
+>>> user
+<User: vikas859>
+>>> user.profile
+<Profile: vikas859 Profile>
+>>> user.profile.image
+<ImageFieldFile: profile_pics/vikas.jpg>
+>>> user.profile.image.width
+300
+>>> user.profile.image.url
+'/profile_pics/vikas.jpg'
+>>> user = User.objects.filter(username='testuser123').first()
+>>> user
+<User: testuser123>
+>>> user.profile.image # no profile image guy
+<ImageFieldFile: default.jpg>
+>>> exit()
