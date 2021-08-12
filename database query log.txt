@@ -1,0 +1,83 @@
+PS D:\frameworks\django_projects\blog\django_project> python manage.py shell
+Python 3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> User.objects.all()
+<QuerySet [<User: vikas859>, <User: testuser123>]>
+>>> #only first user
+>>> User.objects.first()
+<User: vikas859>
+>>> #lastuser
+>>> User.objects.last()
+<User: testuser123>
+>>> #filter function
+
+>>> User.objects.filter(username='vikas')
+<QuerySet []>
+>>> User.objects.filter(username='vikas859')
+<QuerySet [<User: vikas859>]>
+>>> #first result on filter function
+>>> User.objects.filter(username='vikas859').first()
+<User: vikas859>
+>>> user
+<User: vikas859>
+>>> #calling attributes
+>>> user.id
+1
+>>> user.pk #primary key
+1
+>>> user = User.objects.get(id=1) # get user by id
+>>> user
+<User: vikas859>
+>>> Post.objects.all() # calling all posts
+<QuerySet []>
+>>> post_1 = Post(title='Blog_1', content='First post content', author=user)
+>>> Post.objects.all() # not saved to database
+<QuerySet []>
+>>> post_1.save() # post_1 object is saved into database
+>>> Post.objects.all()
+<QuerySet [<Post: Post object (1)>]>
+>>> exit()
+PS D:\frameworks\django_projects\blog\django_project> python manage.py shell
+Python 3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+
+>>> from blog.models import Post
+>>> from django.contrib.auth.models import User
+>>> Post.objects.all()
+<QuerySet [<Post: Blog_1>]>
+>>> # returened the title of blog
+>>> user = User.objects.filter(username='vikas859').first()
+>>> user
+<User: vikas859>
+>>> post_2 = Post(title='Blog 2',content='another 2nd content',author_id=user.id)
+>>> post_2.save() # saving into databse
+>>> Post.objects.all()
+<QuerySet [<Post: Blog_1>, <Post: Blog 2>]>
+>>> post = Post.objects.first() # 1st post
+
+>>> post.content
+'First post content'
+>>> post.date_posted
+datetime.datetime(2021, 8, 12, 15, 15, 35, 621774, tzinfo=<UTC>)
+>>> post.author
+<User: vikas859>
+>>> post.author.email
+'yadavvikas859@gmail.com'
+>>> user.post_set 
+<django.db.models.fields.related_descriptors.create_reverse_many_to_one_manager.<locals>.RelatedManager object at 0x000001ED3C6B4BB0>
+>>> # retrieving all posts from a user
+>>> user.post_set.all()
+<QuerySet [<Post: Blog_1>, <Post: Blog 2>]>
+>>> # creating a new post for that user
+
+>>> user.post_set.create(title='Blog 3', content='Third post content')
+<Post: Blog 3>
+>>> Post.objects.all()
+<QuerySet [<Post: Blog_1>, <Post: Blog 2>, <Post: Blog 3>]>
+>>> exit()
+PS D:\frameworks\django_projects\blog\django_project>
