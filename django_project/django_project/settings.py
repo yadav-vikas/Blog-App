@@ -128,3 +128,6 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CRISPY_TEMPLATE_PACK ='bootstrap4'
+
+# when user logs in it sends him to 'blog-home' route
+LOGIN_REDIRECT_URL = 'blog-home'
