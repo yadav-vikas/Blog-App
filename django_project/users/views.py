@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
 from .forms import  UserRegisterForm
+from django.contrib.auth.decorators import login_required # not access to profile if not logged it again after logout
 from django.contrib import messages # show flash messgaes like confirmed user!!!
 
 #the types of flash message can be given
@@ -36,3 +37,15 @@ def register(request):
     
     return render(request,'users/register.html', {'form': form})
 
+@login_required
+def profile(request):
+    """Creating function to check wether the user is logged in to perform changes
+    and view their profile
+
+    Args:
+        request ([any]): [description]
+
+    Returns:
+        [reder]: [returling the login page]
+    """
+    return render(request,'users/profile.html')

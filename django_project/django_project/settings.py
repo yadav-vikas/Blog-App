@@ -131,3 +131,6 @@ CRISPY_TEMPLATE_PACK ='bootstrap4'
 
 # when user logs in it sends him to 'blog-home' route
 LOGIN_REDIRECT_URL = 'blog-home'
+
+#undefiend or unaccessible pages link will be redirected to login page
+LOGIN_URL = 'login'
