@@ -16,3 +16,13 @@ def create_profile(sender,instance,created,**kwargs):
     """
     if created:
         Profile.objects.create(user=instance)
+
+@receiver(post_save,sender=User)
+def save_profile(sender,instance,**kwargs):
+    """every time a user profile is created it saved that user profile
+    Args:
+        sender ([type]): [description]
+        instance ([type]): [description]
+        created ([type]): [description]
+    """
+    instance.profile.save()

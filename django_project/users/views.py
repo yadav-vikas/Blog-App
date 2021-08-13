@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.forms import UserCreationForm
-from .forms import  UserRegisterForm
+from .forms import  UserRegisterForm,UserUpdateForm,ProfileUpdateForm
 from django.contrib.auth.decorators import login_required # not access to profile if not logged it again after logout
 from django.contrib import messages # show flash messgaes like confirmed user!!!
 
@@ -48,4 +48,21 @@ def profile(request):
     Returns:
         [reder]: [returling the login page]
     """
-    return render(request,'users/profile.html')
+    if request.method == 'POST': # if the user data is not POST method we will not be saving the data and create new form
+        u_form = UserUpdateForm(request.POST, instance=request.user) # prefilled user data in the profile form(instancitaed the existing user)
+        p_form = ProfileUpdateForm(request.POST, request.FILES, instance=request.user.profile) # prefilled user image in the form (instanciated for the form)
+
+        if u_form.is_valid() and p_form.is_valid(): # if form data is valid then we will save it else we will redirect back to profile page to enter details again
+            u_form.save()
+            p_form.save()
+            messages.success(request, f'Your account has been updated!') #flash message if valid form.
+            return redirect('profile') # after successfull sign up redirect link to home page
+    else:
+        u_form = UserUpdateForm(instance=request.user) # prefilled user data in the profile form(instancitaed the existing user)
+        p_form = ProfileUpdateForm(instance=request.user.profile) # prefilled user image in the form (instanciated for the form)
+ 
+    context = {
+        'u_form': u_form,
+        'p_form':p_form
+    }
+    return render(request,'users/profile.html',context)
