@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+from django.urls import reverse
 from django.contrib.auth.models import User # one to many relationship
 
 class Post(models.Model):
@@ -17,3 +18,15 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title
+
+    def get_absolute_url(self):
+        """[redirect vs reverse] : redirect will send you back to some url mentioned
+         on the other hand reverse will simply return the full url as string 
+         and that string can be handled by views to route the url
+
+        Returns:
+            [self]: [description]
+        """
+        return reverse('post-detail',kwargs={'pk':self.pk})
+
+    

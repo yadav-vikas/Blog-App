@@ -34,6 +34,7 @@
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
               {% if user.is_authenticated %} <!-- checking if user is logged in . if do then logout else login/register-->
+              <a class="nav-item nav-link" href="{% url 'post-create' %}">New Post</a> <!-- user profile restriction-->
               <a class="nav-item nav-link" href="{% url 'profile' %}">Profile</a> <!-- user profile restriction-->
               <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a>
               {% else %}
