@@ -13,29 +13,39 @@ from django.contrib import messages # show flash messgaes like confirmed user!!!
 
 
 # django provides functionality of converting functions into htmls forms
+# def register(request):
+#     """If user requests POST method then it instantiate UserCreationForm wih that data is
+#     and store username variable with 'username' at some sort of dictionary strucutr
+#     Else it instantiates an empty form
+
+#     Args:
+#         request ([any]): [description]
+
+#     Returns:
+#         [UserCreationForm]: [returns a form data on POST Method]
+#     """
+#     if request.method == 'POST':
+#         form = UserRegisterForm(request.POST)
+#         if form.is_valid():
+#             form.save()# if user data is valid then save it else show user whats wrong with sign up(maybe that user exists)
+#             username = form.cleaned_data.get('username')
+#             messages.success(request, f'Your account has been created! Please log in to continue!') #flash message if valid form.
+#             return redirect('login') # after successfull sign up redirect link to home page
+#     else:
+#         form = UserRegisterForm()
+#     return render(request,'users/register.html', {'form': form})
+
 def register(request):
-    """If user requests POST method then it instantiate UserCreationForm wih that data is
-    and store username variable with 'username' at some sort of dictionary strucutr
-    Else it instantiates an empty form
-
-    Args:
-        request ([any]): [description]
-
-    Returns:
-        [UserCreationForm]: [returns a form data on POST Method]
-    """
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            form.save()# if user data is valid then save it else show user whats wrong with sign up(maybe that user exists)
+            form.save()
             username = form.cleaned_data.get('username')
-            messages.success(request, f'Your account has been created! Please log in to continue!') #flash message if valid form.
-            return redirect('login') # after successfull sign up redirect link to home page
+            messages.success(request, f'Your account has been created! You are now able to log in')
+            return redirect('login')
     else:
         form = UserRegisterForm()
-
-    
-    return render(request,'users/register.html', {'form': form})
+    return render(request, 'users/register.html', {'form': form})
 
 @login_required
 def profile(request):
