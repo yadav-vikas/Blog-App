@@ -1,0 +1,27 @@
+{% load static %} 
+<html>
+    <head>
+        <title>2048</title>
+        <link rel="stylesheet" href="{% static 'blog/style.css' %}"/>
+ 
+        <script src="{% static 'blog/js/game.js' %}" type="text/javascript"></script> 
+    </head>
+    <body>
+    <div class="cover"></div>
+    <div class="container">
+        <div class="logo">2048</div>
+        <div class="scoreBar">
+            <label style="position: relative; top:-13px;">score:</label>
+            <label id="score"> 0</label>
+            <div id="addScore"></div>
+            <div>
+                <p> join the number to get 2048 tile!</p>
+            </div>
+        </div>
+        <div id="stage"></div>
+        <!--<div id="gameOver hide">-->
+            <!--<div class="overText">GameOver!</div>-->
+        <!--</div>-->
+    </div>
+    </body>
+</html>

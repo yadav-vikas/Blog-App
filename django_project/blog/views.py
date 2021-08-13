@@ -151,4 +151,5 @@ class PostDeletelView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 def about(request):
     return render(request, 'blog/about.html', {'title': 'About'})
 
-    
+def games(request):
+    return render(request,'blog/tiles.html')

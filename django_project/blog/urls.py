@@ -10,5 +10,6 @@ urlpatterns = [
     path('post/<int:pk>/delete/',PostDeletelView.as_view(),name='post-delete'),#calling PostDeletelView as post/primarykey/- id as integer url:/blog/post_detail/delete.html
     path('post/new/',PostCreateView.as_view(),name='post-create'),#calling PostCreatelView as post/primarykey- id to create new posts url:/blog/post/form
     path('about/',views.about,name='blog-about'),
+    path('games/',views.games,name='blog-games'),
     
 ]
