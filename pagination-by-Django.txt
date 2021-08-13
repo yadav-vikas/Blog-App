@@ -1,0 +1,31 @@
+# The Paginator object by DJANGO-----------------------
+
+PS D:\frameworks\django_projects\blog\django_project> python manage.py shell    
+Python 3.9.6 (tags/v3.9.6:db3ff76, Jun 28 2021, 15:26:21) [MSC v.1929 64 bit (AMD64)] on win32
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> from django.core.paginator import Paginator
+>>> posts=['1','2','3','4','5']
+>>> p = Paginator(posts,2) # we are passing paginator with 2 post per page as argument
+>>> p.num_pages # total_no of pages
+3
+>>> for page in p.page_range:
+...     print(page)#pring all pages
+... 
+1
+2
+3
+>>> p1=p.page(1) # the page 1 pagination
+>>> p1
+<Page 1 of 3>
+>>> p1.number # the page of the variable we stored
+1
+>>> p1.object_list # what post numbers we have on page 1
+['1', '2']
+>>> p1.has_previous() # check if previous page exits ?
+False
+>>> p1.has_next() # check if next page exist ?
+True
+>>> p1.next_page_number() # show next page
+2
+>>> exit()
